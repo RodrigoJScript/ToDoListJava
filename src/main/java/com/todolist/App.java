@@ -2,6 +2,7 @@ package com.todolist;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -46,7 +47,7 @@ public class App extends Application {
     }
 
     public static void createTable() {
-        String sql = "CREATE TABLE IF NOT EXISTS tasks ( id integer PRIMARY KEY AUTOINCREMENT, name text NOT NULL, isDone integer)";
+        String sql = "CREATE TABLE IF NOT EXISTS tasks ( id integer PRIMARY KEY AUTOINCREMENT, name text NOT NULL, isDone boolean)";
         try (Connection conn = connect();
                 Statement stmt = conn.createStatement()) {
             stmt.execute(sql);
@@ -55,4 +56,16 @@ public class App extends Application {
         }
     }
 
+    public static void insertTask(String name, Boolean isDone) {
+        String sql = "INSERT INTO tasks (name, isDone) VALUES (?, ?)";
+        try (Connection conn = connect();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, name);
+            pstmt.setBoolean(2, isDone);
+            pstmt.executeUpdate();
+            System.out.println("Tarea agregada exitosamente!");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }

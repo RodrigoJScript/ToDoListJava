@@ -10,7 +10,7 @@ public class PrimaryController {
     @FXML
     private void agregarTarea() {
         String tarea = campoTexto.getText();
-        System.out.println(tarea);
+        App.insertTask(tarea, false);
         campoTexto.clear();
     }
 }
