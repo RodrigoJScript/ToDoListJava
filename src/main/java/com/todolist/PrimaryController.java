@@ -34,12 +34,21 @@ public class PrimaryController {
         }
         App.insertTask(tarea, false);
         campoTexto.clear();
+        cargarTareas();
+    }
+
+    @FXML
+    private void initialize() {
+        cargarTareas();
+    }
+
+    @FXML
+    private void cargarTareas() {
         List<App.Tarea> listaTareas = App.getAllTasks();
         for (App.Tarea task : listaTareas) {
             idColumna.setCellValueFactory(new PropertyValueFactory<>("id"));
             nombreColumna.setCellValueFactory(new PropertyValueFactory<>("name"));
             estadoColumna.setCellValueFactory(new PropertyValueFactory<>("isDone"));
-
             tablaTareas.getItems().add(task);
         }
     }
