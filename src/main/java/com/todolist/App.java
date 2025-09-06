@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -70,16 +72,43 @@ public class App extends Application {
         }
     }
 
-    public static void getAllTasks() {
+    public static List<Tarea> getAllTasks() {
         String sql = "SELECT * FROM tasks";
         try (Connection conn = connect();
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(sql)) {
+            List<Tarea> listaTareas = new ArrayList<>();
             while (rs.next()) {
-                System.out.println(rs.getInt("id") + "\t" + rs.getString("name") + "\t" + rs.getBoolean("isDone"));
+                listaTareas.add(new Tarea(rs.getInt("id"), rs.getString("name"), rs.getBoolean("isDone")));
             }
+            return listaTareas;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
+    public static class Tarea {
+        private int id;
+        private String name;
+        private boolean isDone;
+
+        public Tarea(int id, String name, boolean isDone) {
+            this.id = id;
+            this.name = name;
+            this.isDone = isDone;
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public boolean getIsDone() {
+            return isDone;
         }
     }
 }
