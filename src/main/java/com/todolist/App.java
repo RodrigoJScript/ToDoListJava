@@ -3,6 +3,7 @@ package com.todolist;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -64,6 +65,19 @@ public class App extends Application {
             pstmt.setBoolean(2, isDone);
             pstmt.executeUpdate();
             System.out.println("Tarea agregada exitosamente!");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void getAllTasks() {
+        String sql = "SELECT * FROM tasks";
+        try (Connection conn = connect();
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery(sql)) {
+            while (rs.next()) {
+                System.out.println(rs.getInt("id") + "\t" + rs.getString("name") + "\t" + rs.getBoolean("isDone"));
+            }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
