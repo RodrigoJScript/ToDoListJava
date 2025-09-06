@@ -17,8 +17,8 @@ import javafx.stage.Stage;
 public class App extends Application {
 
     public static void main(String[] args) {
+        createTable();
         launch(args);
-        configDatabase();
     }
 
     @Override
@@ -53,11 +53,6 @@ public class App extends Application {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-    }
-
-    public static void configDatabase() {
-        connect();
-        createTable();
     }
 
 }
