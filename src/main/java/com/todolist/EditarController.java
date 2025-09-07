@@ -25,9 +25,6 @@ public class EditarController implements Initializable {
     @FXML
     private Label lblNombre;
 
-    @FXML
-    private AnchorPane raiz;
-
     private App.Tarea tareaActual;
 
     public void setTarea(App.Tarea tarea) {
@@ -48,8 +45,7 @@ public class EditarController implements Initializable {
                 tareaActual.setIsDone(checkBoxDone.isSelected());
                 App.updateTask(tareaActual);
 
-                // Cerrar la ventana actual
-                Stage stage = (Stage) raiz.getScene().getWindow();
+                Stage stage = (Stage) campoTexto.getScene().getWindow();
                 stage.close();
             }
         }
