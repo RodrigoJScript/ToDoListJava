@@ -1,3 +1,5 @@
-com/todolist/App.class
 module-info.class
 com/todolist/PrimaryController.class
+com/todolist/App.class
+com/todolist/App$Tarea.class
+com/todolist/EditarController.class

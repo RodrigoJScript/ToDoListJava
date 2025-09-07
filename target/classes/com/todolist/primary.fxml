@@ -20,7 +20,7 @@
             <TableColumn fx:id="estadoColumna" text="Estado" />
          </columns>
       </TableView>   
-      <Button text="Editar" onAction="#irAEditar" />
+      <Button text="Editar" onMouseClicked="#irAEditar"/>
    </children>
    <padding>
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
