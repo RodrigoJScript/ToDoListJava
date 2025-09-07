@@ -133,4 +133,16 @@ public class App extends Application {
             System.out.println("Error al actualizar la tarea: " + e.getMessage());
         }
     }
+
+    public static void deleteTask(int id) {
+        String sql = "DELETE FROM tasks WHERE id = ?";
+        try (Connection conn = connect();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, id);
+            pstmt.executeUpdate();
+            System.out.println("Tarea eliminada exitosamente!");
+        } catch (SQLException e) {
+            System.out.println("Error al eliminar la tarea: " + e.getMessage());
+        }
+    }
 }
