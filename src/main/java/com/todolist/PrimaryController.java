@@ -88,4 +88,16 @@ public class PrimaryController implements Initializable {
             }
         }
     }
+
+    @FXML
+    private void eliminarTarea() {
+        App.Tarea selectedItem = tablaTareas.getSelectionModel().getSelectedItem();
+        if (selectedItem != null) {
+            App.deleteTask(selectedItem.getId());
+            /*
+             * Stage stage = (Stage) campoTexto.getScene().getWindow();
+             * stage.close();
+             */
+        }
+    }
 }
