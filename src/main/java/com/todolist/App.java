@@ -107,8 +107,30 @@ public class App extends Application {
             return name;
         }
 
+        public void setName(String name) {
+            this.name = name;
+        }
+
         public boolean getIsDone() {
             return isDone;
+        }
+
+        public void setIsDone(boolean isDone) {
+            this.isDone = isDone;
+        }
+    }
+
+    public static void updateTask(Tarea tarea) {
+        String sql = "UPDATE tasks SET name = ?, isDone = ? WHERE id = ?";
+        try (Connection conn = connect();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, tarea.getName());
+            pstmt.setBoolean(2, tarea.getIsDone());
+            pstmt.setInt(3, tarea.getId());
+            pstmt.executeUpdate();
+            System.out.println("Tarea actualizada exitosamente!");
+        } catch (SQLException e) {
+            System.out.println("Error al actualizar la tarea: " + e.getMessage());
         }
     }
 }
